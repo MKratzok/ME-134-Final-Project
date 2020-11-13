@@ -15,8 +15,8 @@ This is a little run down on how to use GitHub
 
 1) Download [GitHub Desktop](https://desktop.github.com/)
 2) Open GitHub Desktop and clone the repository 
-    * __File -> Clone Repository -> URL__ 
-    * __Paste https://github.com/MKratzok/ME-134-Final-Project.git in  _URL or username/repository_ field
+    * __File -> Clone Repository -> URL__
+    * __Paste https://github.com/MKratzok/ME-134-Final-Project.git in *URL or username/repository* field__
     * __Select a _Local path_ for the repository to live__
     * __Press Clone__
 3) Press _Fetch Origin_ in the top tool bar
