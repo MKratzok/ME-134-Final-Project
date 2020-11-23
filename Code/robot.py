@@ -13,14 +13,78 @@ from time import sleep
     [8] is Wheel'''
 
 # Preset Servo Angles
-START = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
-STEP = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+START = [0, 180, 180, 90, 180, 0, 0, 90, 60]
+EXTEND = [135, 70, 135, -1, 45, 130, 45, -1, -1]
 LIFT = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+
 
 class Robot:
     def __init__(self):
         self.kit = ServoKit(channels=16)
+        self.lFoot = self.kit.servo[0]
+        self.lAnkle = self.kit.servo[1]
+        self.lKnee = self.kit.servo[2]
+        self.lHip = self.kit.servo[3]
+        self.rFoot = self.kit.servo[4]
+        self.rAnkle = self.kit.servo[5]
+        self.rKnee = self.kit.servo[6]
+        self.rHip = self.kit.servo[7]
+        self.wheel = self.kit.servo[8]
+
         self._set_all(START)
+
+    def feet(self, angle=-1):
+        if angle == -1:
+            return self.lFoot.angle
+        else:
+            self.lFoot.angle = angle
+            self.rFoot.angle = 180 - angle
+
+    def ankles(self, angle=-1):
+        if angle == -1:
+            return self.rAnkle.angle
+        else:
+            self.lAnkle.angle = 180 - angle
+            self.rAnkle.angle = angle
+
+    def knees(self, angle=-1):
+        if angle == -1:
+            return self.rKnee.angle
+        else:
+            self.lKnee.angle = 180 - angle
+            self.rKnee.angle = angle
+
+    def hips(self, angle=-1):
+        if angle == -1:
+            return self.rHip.angle
+        else:
+            self.lHip.angle = 180 - angle
+            self.rHip.angle = angle
+
+    def step(self):
+        self.lKnee.angle = 135
+        self.lAnkle.angle = 70
+        self.lFoot.angle = 135
+
+        self.rKnee.angle = 45
+        self.rAnkle.angle = 130
+        self.rFoot.angle = 45
+
+        sleep(1)
+
+        self.curl()
+
+    def curl(self):
+        self.lKnee.angle = 180
+        self.rKnee.angle = 0
+
+        sleep(0.01)
+
+        self.lFoot.angle = 0
+        self.lAnkle.angle = 180
+
+        self.rFoot.angle = 180
+        self.rAnkle.angle = 0
 
     def _set_all(self, arr):
         """
@@ -32,12 +96,8 @@ class Robot:
             if arr[i] != -1:
                 self.kit.servo[i].angle = arr[i]
 
-    def step(self):
-        self._set_all(STEP)
-
     def extend(self):
-        #STUB TODO
-        return
+        self._set_all(EXTEND)
 
     def turn(self, degrees):
         """
@@ -45,12 +105,14 @@ class Robot:
         :param degrees: the total number of degrees to turn
         :return: none
         """
-        while degrees > 90 or degrees < -90:
-            if degrees > 90:
-                self.turn(90)
-                degrees -= 90
-            elif degrees < -90:
-                self.turn(-90)
-                degrees += 90
+        max_angle = 60
 
-        self.kit.servo[8].angle = 90 + degrees
+        while degrees > 60 or degrees < -60:
+            if degrees > 60:
+                self.turn(60)
+                degrees -= 60
+            elif degrees < -60:
+                self.turn(-60)
+                degrees += 60
+
+        self.kit.servo[8].angle = 60 + degrees
