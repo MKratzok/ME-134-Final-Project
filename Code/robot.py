@@ -116,3 +116,5 @@ class Robot:
                 degrees += 60
 
         self.kit.servo[8].angle = 60 + degrees
+
+        # This is a test!
