@@ -13,8 +13,8 @@ from time import sleep
     [8] is Wheel'''
 
 # Preset Servo Angles
-START = [0, 180, 90, 90, 180, 0, 90, 90, 45]
-EXTEND = [135, 70, 135, -1, 45, 130, 45, -1, -1]
+START = [0, 180, 90, 45, 180, 0, 90, 135, 90]
+EXTEND = [45, 110, 45, -1, 135, 160, 135, -1, -1]
 LIFT = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
 
 
@@ -98,12 +98,8 @@ class Robot:
 
     """-------------------------------------- Step (Parallel) --------------------------------------"""
 
-    def step(self):
-        self.ankles(45)
-        sleep(0.1)
-        self.feet(45)
-        sleep(0.1)
-        self.reset()
+    def push(self):
+        self.knees(-90)
 
     def curl(self):
         self.knees(0)
@@ -120,31 +116,38 @@ class Robot:
 
     def walk(self, steps):
         for i in range(0, steps):
-            # Brace w left
-            self.lHip.angle = 135
-            self.lKnee.angle = 30
+            # Step Right
+            if i % 2 == 0:
+                # Move w right
+                self.rHip.angle = 100
+                self.rKnee.angle = 30
+                sleep(0.1)
 
-            sleep(0.01)
+                self.rHip.angle = 150
+                sleep(0.1)
 
-            # Move w right
-            self.rHip.angle = 0
-            self.rKnee.angle = 45
+                self.rHip.angle = 135
 
-            sleep(0.01)
+                # If last step
+                self.rKnee.angle = 90
 
-            # Brace w right
-            self.rAnkle.angle = 45
-            self.rFoot.angle = 135
+                sleep(0.1)
+            else:
+                self.lHip.angle = 80
+                self.lKnee.angle = 150
+                sleep(0.1)
 
-            sleep(0.01)
+                self.lHip.angle = 45
+                sleep(0.1)
 
-            self.lHip.angle = 135
-            self.lKnee.angle = 90
-            sleep(0.01)
-            self.lHip.angle = 90
+                self.lHip.angle = 90
 
-            # Move w both
-            # self.lHip.angle =
+                # If last step
+                if i == steps - 1:
+                    self.lKnee.angle = 90
+                else:
+                    self.lKnee.angle = 45
+
 
         # self.reset()
 
@@ -154,7 +157,9 @@ class Robot:
         self._set_all(START)
 
     def extend(self):
-        self._set_all(EXTEND)
+        self.feet(180)
+        self.ankles(180)
+        self.knees(180)
 
     def turn(self, degrees):
         """
