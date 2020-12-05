@@ -114,62 +114,81 @@ class Robot:
 
     """-------------------------------------- Walk (Biped) --------------------------------------"""
 
-    def walkOld(self, steps):
-        for i in range(0, steps):
-            # Step Right
-            if i % 2 == 0:
-                # Move w right
-                self.rHip.angle = 100
-                self.rKnee.angle = 30
-                sleep(0.1)
+    # def walkOld(self, steps):
+    #     for i in range(0, steps):
+    #         # Step Right
+    #         if i % 2 == 0:
+    #             # Move w right
+    #             self.rHip.angle = 100
+    #             self.rKnee.angle = 30
+    #             sleep(0.1)
+    #
+    #             self.rHip.angle = 150
+    #             sleep(0.1)
+    #
+    #             self.rHip.angle = 135
+    #
+    #             # If last step
+    #             self.rKnee.angle = 90
+    #
+    #             sleep(0.1)
+    #         else:
+    #             self.lHip.angle = 80
+    #             self.lKnee.angle = 150
+    #             sleep(0.1)
+    #
+    #             self.lHip.angle = 45
+    #             sleep(0.1)
+    #
+    #             self.lHip.angle = 90
+    #
+    #             # If last step
+    #             if i == steps - 1:
+    #                 self.lKnee.angle = 90
+    #             else:
+    #                 self.lKnee.angle = 45
 
-                self.rHip.angle = 150
-                sleep(0.1)
 
-                self.rHip.angle = 135
+    """-------------------------------------- Walk (Parallel) --------------------------------------"""
 
-                # If last step
-                self.rKnee.angle = 90
-
-                sleep(0.1)
-            else:
-                self.lHip.angle = 80
-                self.lKnee.angle = 150
-                sleep(0.1)
-
-                self.lHip.angle = 45
-                sleep(0.1)
-
-                self.lHip.angle = 90
-
-                # If last step
-                if i == steps - 1:
-                    self.lKnee.angle = 90
-                else:
-                    self.lKnee.angle = 45
-
-
-"""-------------------------------------- Walk (Parallel) --------------------------------------"""
-        
-        
     def walk(self, steps):
-            
         for i in range(0, steps):
-            r.lHip.angle = 110
-            sleep(0.3)
-            r.lKnee.angle = 140
-            sleep(0.3)
-            r.rHip.angle = 100
-            sleep(0.3)
-            r.rKnee.angle = 50
-            sleep(0.3)
-            
-            r.knees(0)
-            sleep(0.3)
-            r.hips(135)
-            sleep(0.3)
-                
-            
+            delay = 0.5
+            self.lHip.angle = 120
+            sleep(delay)
+            self.lKnee.angle = 130
+            sleep(delay)
+            self.lHip.angle = 60
+            sleep(delay)
+            self.rHip.angle = 80
+            sleep(delay)
+            self.lKnee.angle = 120
+            sleep(delay)
+            self.rKnee.angle = 40
+            sleep(delay)
+            self.rHip.angle = 70
+            sleep(delay)
+
+            #self.knees(40)
+            #sleep(delay)
+
+            #self.lHip.angle = 180
+            #sleep(delay)
+            #self.lKnee.angle = 120
+            #sleep(delay)
+
+            #self.rHip.angle = 0
+            #sleep(delay)
+            #self.rKnee.angle = 60
+            #sleep(delay)
+
+            #self.hips(130)
+            #sleep(delay)
+
+            #self.hips(135)
+            #sleep(0.6)
+
+
 
     """-------------------------------------- Whole Body --------------------------------------"""
 
