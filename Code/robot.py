@@ -114,7 +114,7 @@ class Robot:
 
     """-------------------------------------- Walk (Biped) --------------------------------------"""
 
-    def walk(self, steps):
+    def walkOld(self, steps):
         for i in range(0, steps):
             # Step Right
             if i % 2 == 0:
@@ -149,7 +149,27 @@ class Robot:
                     self.lKnee.angle = 45
 
 
-        # self.reset()
+"""-------------------------------------- Walk (Parallel) --------------------------------------"""
+        
+        
+    def walk(self, steps):
+            
+        for i in range(0, steps):
+            r.lHip.angle = 110
+            sleep(0.3)
+            r.lKnee.angle = 140
+            sleep(0.3)
+            r.rHip.angle = 100
+            sleep(0.3)
+            r.rKnee.angle = 50
+            sleep(0.3)
+            
+            r.knees(0)
+            sleep(0.3)
+            r.hips(135)
+            sleep(0.3)
+                
+            
 
     """-------------------------------------- Whole Body --------------------------------------"""
 
