@@ -191,23 +191,36 @@ class Robot:
     def turning(self, steps):
         for i in range(0, steps):
             delay = 0.3
-            self.wheel.angle += 10
+            self.wheel.angle += 3
             sleep(delay)
             self.lHip.angle = 100
             sleep(delay)
-            self.lKnee.angle = 110
+            self.lKnee.angle = 120
             sleep(delay)
             self.lHip.angle = 45
             sleep(delay)
-            self.rHip.angle = 75
+            self.lKnee.angle = 90
+            sleep(delay)
+            self.lHip.angle = 100
+            sleep(delay)
+            self.lKnee.angle = 120
+            sleep(delay)
+            self.lHip.angle = 45
             sleep(delay)
             self.lKnee.angle = 90
             sleep(delay)
-            self.rKnee.angle = 70
+            self.lHip.angle = 100
             sleep(delay)
-            self.rHip.angle = 135
+            self.lKnee.angle = 120
             sleep(delay)
-            self.rKnee.angle = 90
+            self.lHip.angle = 45
+            sleep(delay)
+            self.lKnee.angle = 90
+
+        for i in range(0, steps):
+            delay = 0.3
+            self.wheel.angle -= 3
+            sleep(delay)
 
 
 
