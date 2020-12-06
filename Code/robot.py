@@ -153,22 +153,22 @@ class Robot:
 
     def walk(self, steps):
         for i in range(0, steps):
-            delay = 0.5
-            self.lHip.angle = 120
+            delay = 0.3
+            self.lHip.angle = 100
             sleep(delay)
-            self.lKnee.angle = 130
+            self.lKnee.angle = 110
             sleep(delay)
-            self.lHip.angle = 60
+            self.lHip.angle = 45
             sleep(delay)
-            self.rHip.angle = 80
+            self.rHip.angle = 75
             sleep(delay)
-            self.lKnee.angle = 120
+            self.lKnee.angle = 90
             sleep(delay)
-            self.rKnee.angle = 40
+            self.rKnee.angle = 70
             sleep(delay)
-            self.rHip.angle = 70
+            self.rHip.angle = 135
             sleep(delay)
-
+            self.rKnee.angle = 90
             #self.knees(40)
             #sleep(delay)
 
@@ -187,6 +187,29 @@ class Robot:
 
             #self.hips(135)
             #sleep(0.6)
+    """--------------------------------------  Turn ------------------------------------------------"""
+    def turning(self, steps):
+        for i in range(0, steps):
+            delay = 0.3
+            self.wheel.angle += 10
+            sleep(delay)
+            self.lHip.angle = 100
+            sleep(delay)
+            self.lKnee.angle = 110
+            sleep(delay)
+            self.lHip.angle = 45
+            sleep(delay)
+            self.rHip.angle = 75
+            sleep(delay)
+            self.lKnee.angle = 90
+            sleep(delay)
+            self.rKnee.angle = 70
+            sleep(delay)
+            self.rHip.angle = 135
+            sleep(delay)
+            self.rKnee.angle = 90
+
+
 
 
 
