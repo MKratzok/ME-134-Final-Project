@@ -1,6 +1,7 @@
 import board
 import busio
 import adafruit_vl6180x
+import adafruit_vl53l0x
 # import cv2
 import time
 
@@ -22,8 +23,14 @@ class Sensors:
         time.sleep(0.25)
 
     @property
-    def range(self):
+    def range_short(self):
         val = self.vl6180X.range
+        print('Range: {0}mm'.format(val))
+        return val
+
+    @property
+    def range(self):
+        val = self.vl53l0x.range
         print('Range: {0}mm'.format(val))
         return val
 

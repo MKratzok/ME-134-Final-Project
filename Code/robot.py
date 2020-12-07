@@ -33,7 +33,6 @@ class Robot:
 
         self._set_all(START)
 
-
     """-------------------------------------- Parallel Movement --------------------------------------"""
 
     def feet(self, angle=-1):
@@ -112,44 +111,7 @@ class Robot:
         self.rFoot.angle = 180
         self.rAnkle.angle = 0
 
-    """-------------------------------------- Walk (Biped) --------------------------------------"""
-
-    # def walkOld(self, steps):
-    #     for i in range(0, steps):
-    #         # Step Right
-    #         if i % 2 == 0:
-    #             # Move w right
-    #             self.rHip.angle = 100
-    #             self.rKnee.angle = 30
-    #             sleep(0.1)
-    #
-    #             self.rHip.angle = 150
-    #             sleep(0.1)
-    #
-    #             self.rHip.angle = 135
-    #
-    #             # If last step
-    #             self.rKnee.angle = 90
-    #
-    #             sleep(0.1)
-    #         else:
-    #             self.lHip.angle = 80
-    #             self.lKnee.angle = 150
-    #             sleep(0.1)
-    #
-    #             self.lHip.angle = 45
-    #             sleep(0.1)
-    #
-    #             self.lHip.angle = 90
-    #
-    #             # If last step
-    #             if i == steps - 1:
-    #                 self.lKnee.angle = 90
-    #             else:
-    #                 self.lKnee.angle = 45
-
-
-    """-------------------------------------- Walk (Parallel) --------------------------------------"""
+    """--------------------------------------- Walk (Bipedal) --------------------------------------"""
 
     def walk(self, steps):
         for i in range(0, steps):
@@ -187,7 +149,9 @@ class Robot:
 
             #self.hips(135)
             #sleep(0.6)
-    """--------------------------------------  Turn ------------------------------------------------"""
+
+    """-------------------------------------------- Turn -------------------------------------------"""
+
     def turning(self, steps):
         for i in range(0, steps):
             delay = 0.3
@@ -230,11 +194,7 @@ class Robot:
             self.wheel.angle = 90
             sleep(delay)
 
-
-
-
-
-    """-------------------------------------- Whole Body --------------------------------------"""
+    """----------------------------------------- Whole Body ----------------------------------------"""
 
     def reset(self):
         self._set_all(START)
@@ -242,7 +202,7 @@ class Robot:
     def extend(self):
         self.feet(180)
         self.ankles(180)
-        self.knees(180)
+        self.knees(90)
 
     def turn(self, degrees):
         """
@@ -261,6 +221,11 @@ class Robot:
                 degrees += 60
 
         self.kit.servo[8].angle = 60 + degrees
+
+    def tuck(self):
+        self.hips(90)
+        sleep(0.1)
+        self.knees(-90)
 
     """-------------------------------------- Private Helpers --------------------------------------"""
 
