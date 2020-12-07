@@ -2,7 +2,7 @@ import board
 import busio
 import adafruit_vl6180x
 import adafruit_vl53l0x
-# import cv2
+import cv2
 import time
 
 GAIN = [[1, adafruit_vl6180x.ALS_GAIN_1],  # 1x gain
@@ -12,14 +12,15 @@ GAIN = [[1, adafruit_vl6180x.ALS_GAIN_1],  # 1x gain
         [5, adafruit_vl6180x.ALS_GAIN_5],  # 5x gain
         [10, adafruit_vl6180x.ALS_GAIN_10],  # 10x gain
         [20, adafruit_vl6180x.ALS_GAIN_20],  # 20x gain
-        [40, adafruit_vl6180x.ALS_GAIN_40]]  # 40x gain
+        [40, adafruit_vl6180x.ALS_GAIN_40]]
 
 
 class Sensors:
     def __init__(self):
         i2c = busio.I2C(board.SCL, board.SDA)
         self.vl6180X = adafruit_vl6180x.VL6180X(i2c)
-        # self.cap = cv2.VideoCapture(0)
+        self.vl53l0x = adafruit_vl53l0x.VL53L0X(i2c)
+        self.cap = cv2.VideoCapture(0)
         time.sleep(0.25)
 
     @property
@@ -55,6 +56,6 @@ class Sensors:
         print('Light ({}x gain): '.format(gain) + '{0} lux'.format(lux))
         return lux
 
-    # def _chz(self):
-    #     ret, img = self.cap.read()
-    #     print('I took a picture! :)')
+    def take_photo(self):
+        ret, img = self.cap.read()
+        print('I took a picture! :)')

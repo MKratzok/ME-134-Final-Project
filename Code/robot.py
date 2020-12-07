@@ -63,38 +63,6 @@ class Robot:
             self.lHip.angle = 180 - angle
             self.rHip.angle = angle
 
-    """-------------------------------------- Roll Onto Front --------------------------------------"""
-
-    def forward_roll(self):
-        self.lKnee.angle = 135
-        self.lAnkle.angle = 70
-        self.lFoot.angle = 135
-
-        self.rKnee.angle = 45
-        self.rAnkle.angle = 130
-        self.rFoot.angle = 45
-
-        sleep(1)
-
-        self.curl_roll()
-
-    def curl_roll(self):
-        self.lKnee.angle = 180
-        self.rKnee.angle = 0
-
-        sleep(0.01)
-
-        self.lFoot.angle = 0
-        self.lAnkle.angle = 180
-
-        self.rFoot.angle = 180
-        self.rAnkle.angle = 0
-
-    def un_roll(self):
-        self.extend()
-        sleep(0.5)
-        self.reset()
-
     """-------------------------------------- Step (Parallel) --------------------------------------"""
 
     def push(self):
@@ -204,24 +172,6 @@ class Robot:
         self.ankles(180)
         self.knees(90)
 
-    def turn(self, degrees):
-        """
-        turn(degrees) - turns the robot in maximum steps of 45 degrees
-        :param degrees: the total number of degrees to turn
-        :return: none
-        """
-        max_angle = 60
-
-        while degrees > 60 or degrees < -60:
-            if degrees > 60:
-                self.turn(60)
-                degrees -= 60
-            elif degrees < -60:
-                self.turn(-60)
-                degrees += 60
-
-        self.kit.servo[8].angle = 60 + degrees
-
     def tuck(self):
         self.hips(90)
         sleep(0.1)
@@ -248,3 +198,53 @@ class Robot:
         print("rAnkle:\t{}".format(self.rAnkle.angle))
         print("rKnee:\t{}".format(self.rKnee.angle))
         print("rHip:\t{}".format(self.rHip.angle))
+
+    """-------------------------------------- Roll Onto Front --------------------------------------"""
+
+    def forward_roll(self):
+        self.lKnee.angle = 135
+        self.lAnkle.angle = 70
+        self.lFoot.angle = 135
+
+        self.rKnee.angle = 45
+        self.rAnkle.angle = 130
+        self.rFoot.angle = 45
+
+        sleep(1)
+
+        self.curl_roll()
+
+    def curl_roll(self):
+        self.lKnee.angle = 180
+        self.rKnee.angle = 0
+
+        sleep(0.01)
+
+        self.lFoot.angle = 0
+        self.lAnkle.angle = 180
+
+        self.rFoot.angle = 180
+        self.rAnkle.angle = 0
+
+    def un_roll(self):
+        self.extend()
+        sleep(0.5)
+        self.reset()
+
+    def turn(self, degrees):
+        """
+        turn(degrees) - turns the robot in maximum steps of 45 degrees
+        :param degrees: the total number of degrees to turn
+        :return: none
+        """
+        max_angle = 60
+
+        while degrees > 60 or degrees < -60:
+            if degrees > 60:
+                self.turn(60)
+                degrees -= 60
+            elif degrees < -60:
+                self.turn(-60)
+                degrees += 60
+
+        self.kit.servo[8].angle = 60 + degrees
