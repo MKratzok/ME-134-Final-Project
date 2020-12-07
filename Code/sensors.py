@@ -24,14 +24,14 @@ class Sensors:
         time.sleep(0.25)
 
     @property
-    def range_short(self):
-        val = self.vl6180X.range
+    def range(self):
+        val = self.vl53l0x.range
         print('Range: {0}mm'.format(val))
         return val
 
     @property
-    def range(self):
-        val = self.vl53l0x.range
+    def range_short(self):
+        val = self.vl6180X.range
         print('Range: {0}mm'.format(val))
         return val
 
