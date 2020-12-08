@@ -72,7 +72,7 @@ def run_manual(r, s):
             return
         elif c == 'a':
             gain = input('What gain level would you like? 1, 1.25, 1.67, 2.5, 5, 10, 20, 40?')
-            s.read_lux(gain)
+            print(('Light {} lux'.format(s.read_lux(gain)).ljust(21, '-')).rjust(30, '-'))
         elif c == 'sh':
             print(('Range {}mm'.format(s.range_short).ljust(20, '-')).rjust(30, '-'))
         else:
