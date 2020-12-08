@@ -18,19 +18,22 @@ GAIN = [[1, adafruit_vl6180x.ALS_GAIN_1],  # 1x gain
 class Sensors:
     def __init__(self):
         i2c = busio.I2C(board.SCL, board.SDA)
+
         input('Is VL6180 unplugged?')
         self.change_addr(i2c)
+        self.vl53l0x = self.change_addr(i2c)
         input('Good to go, press enter to continue. ')
 
-        self.vl53l0x = adafruit_vl53l0x.VL53L0X(i2c, address=28)
         self.vl6180X = adafruit_vl6180x.VL6180X(i2c)
         self.cap = cv2.VideoCapture(0)
         time.sleep(0.25)
 
-    def change_addr(self, vl53l0x, i2c):
+    def change_addr(self, i2c):
         time.sleep(2)
+        vl53l0x = adafruit_vl53l0x.VL53L0X(i2c)
         vl53l0x.set_address(28)
         print('I think everything worked')
+        return vl53l0x
 
     @property
     def range(self):
