@@ -18,12 +18,14 @@ def menu():
           '\t[R]eset\n'
           '\t[E]xtend\n'
           '\t[S]ense range\n'
+          '\t[Sh]ort range\n'
           '\t[L]ight level\n'
+          '\t[A]djust gain for light level\n'
           '\t[P]icture\n'
           '\t[Q]uit\n')
     c = input().lower()
 
-    if c in ['w', 't', 'c', 'r', 'e', 's', 'l', 'p', 'q', 'm']:
+    if c in ['w', 't', 'c', 'r', 'e', 's', 'l', 'p', 'q', 'm', 'a', 'sh']:
         return c
     else:
         print('Command not found.')
@@ -63,11 +65,16 @@ def run_manual(r, s):
         elif c == 's':
             print(('Range {}mm'.format(s.range).ljust(20, '-')).rjust(30,'-'))
         elif c == 'l':
-            print(('Light {} lux'.format(11).ljust(21, '-')).rjust(30,'-'))
+            print(('Light {} lux'.format(s.read_lux()).ljust(21, '-')).rjust(30,'-'))
         elif c == 'p':
             s.take_photo()
         elif c == 'q':
             return
+        elif c == 'a':
+            gain = input('What gain level would you like? 1, 1.25, 1.67, 2.5, 5, 10, 20, 40?')
+            s.read_lux(gain)
+        elif c == 'sh':
+            print(('Range {}mm'.format(s.range_short).ljust(20, '-')).rjust(30, '-'))
         else:
             print('This should not happen. Please contact MAX and tell him that \"' + c + '\" messed up the cmd seq.')
             exit(-69)
