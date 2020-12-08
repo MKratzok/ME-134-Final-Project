@@ -71,6 +71,3 @@ class Sensors:
     def take_photo(self):
         ret, img = self.cap.read()
         print('I took a picture! :)')
-
-    def set_addresses(self):
-        GPIO
