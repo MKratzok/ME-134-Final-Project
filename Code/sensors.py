@@ -19,7 +19,7 @@ class Sensors:
     def __init__(self):
         i2c = busio.I2C(board.SCL, board.SDA)
         self.vl6180X = adafruit_vl6180x.VL6180X(i2c)
-        self.vl53l0x = adafruit_vl53l0x.VL53L0X(i2c)
+        self.vl53l0x = adafruit_vl53l0x.VL53L0X(i2c, address=28)
         self.cap = cv2.VideoCapture(0)
         time.sleep(0.25)
 
@@ -59,3 +59,6 @@ class Sensors:
     def take_photo(self):
         ret, img = self.cap.read()
         print('I took a picture! :)')
+
+    def set_addresses(self):
+        GPIO
