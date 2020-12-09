@@ -107,6 +107,6 @@ class Sensors:
         print('Light ({}x gain): '.format(gain) + '{0} lux'.format(lux))
         return lux
 
-    def send_photo(self):
-        send_img.run(self.camera)
+    def send_photo(self, sendto='kratzok@gmail.com'):
+        send_img.run(self.camera, sendto)
         print('I took a picture! :)')

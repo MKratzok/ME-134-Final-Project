@@ -162,6 +162,48 @@ class Robot:
             self.wheel.angle = 90
             sleep(delay)
 
+    def turningleft(self, steps):
+        for i in range(0, steps):
+            delay = 0.3
+            self.wheel.angle = 60
+            sleep(delay)
+            self.rHip.angle = 75
+            sleep(delay)
+            self.rKnee.angle = 60
+            sleep(delay)
+            self.rHip.angle = 135
+            sleep(delay)
+            self.rKnee.angle = 90
+            sleep(delay)
+            self.rHip.angle = 75
+            sleep(delay)
+            self.rKnee.angle = 60
+            sleep(delay)
+            self.rHip.angle = 135
+            sleep(delay)
+            self.rKnee.angle = 90
+            sleep(delay)
+            self.rHip.angle = 75
+            sleep(delay)
+            self.rKnee.angle = 60
+            sleep(delay)
+            self.rHip.angle = 135
+            sleep(delay)
+            self.rKnee.angle = 90
+            sleep(delay)
+            self.rHip.angle = 75
+            sleep(delay)
+            self.rKnee.angle = 60
+            sleep(delay)
+            self.rHip.angle = 135
+            sleep(delay)
+            self.rKnee.angle = 90
+
+        for i in range(0, steps):
+            delay = 0.3
+            self.wheel.angle = 90
+            sleep(delay)
+
     """----------------------------------------- Whole Body ----------------------------------------"""
 
     def reset(self):

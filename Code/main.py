@@ -17,14 +17,15 @@ def run_auto(r, s, light_0, obstacles=0, wall=False, tunnel=False, hulk=False, d
         print('wall')
         r.hips(135)
         sleep(1)
-        r.walk(5)
+        r.walk(25)
         r.climb()
         run_auto(r, s, light_0, obstacles=obstacles+1, wall=True, tunnel=tunnel, hulk=hulk)
     elif not tunnel and (s.read_lux() < 20 or (wall and hulk)):
         print('tunnel')
         r.hips(135)
-        r.turning(12)
-        r.walk(5)
+        r.walk(12)
+        r.turning(30)
+        r.walk(25)
         run_auto(r, s, light_0, obstacles=obstacles+1, wall=wall, tunnel=True, hulk=hulk)
     elif not hulk and (wall and (tunnel or do_hulk)):
         print('hulk')
@@ -73,6 +74,7 @@ def menu():
     print('Command Options:\n'
           '\t[W]alk\n'
           '\t[T]urn 12 steps\n'
+          '\t[T]urn [L]eft\n'
           '\t[M]anual turn\n'
           '\t[C]limb\n'
           '\t[R]eset\n'
@@ -86,7 +88,7 @@ def menu():
           '\t[Q]uit\n')
     c = input().lower()
 
-    if c in ['w', 't', 'c', 'r', 'e', 's', 'l', 'p', 'q', 'm', 'a', 'sh', 'p', 'pi']:
+    if c in ['w', 't', 'c', 'r', 'e', 's', 'l', 'p', 'q', 'm', 'a', 'sh', 'p', 'pi', 'tl']:
         return c
     else:
         print('Command not found.')
@@ -138,6 +140,9 @@ def run_manual(r, s):
             print(('Light {} lux'.format(s.read_lux(gain)).ljust(21, '-')).rjust(30, '-'))
         elif c == 'sh':
             print(('Range {}mm'.format(s.range_short).ljust(20, '-')).rjust(30, '-'))
+        elif c == 'tl':
+            steps = int(input('How many steps?'))
+            r.turningleft(steps)
         else:
             print('This should not happen. Please contact MAX and tell him that \"' + c + '\" messed up the cmd seq.')
             exit(-1)
