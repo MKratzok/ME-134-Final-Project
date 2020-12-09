@@ -4,8 +4,27 @@ from time import sleep
 import sensors
 
 
-def run_auto(r):
-    # Automatic mode TODO
+def run_auto(r, s, light_0, obstacles=0):
+    input('Am I in the right spot to start? Press enter to continue...')
+
+    # Automatic mode
+
+    if obstacles == 3:
+        print('Heck yeah! I did it!!! Aren\'t you proud of me??? :)')
+        return
+
+    # Check if wall
+    if s.range < 100 and s.read_lux() >= light_0 - 5:
+        r.walk(5)
+        r.climb()
+    elif s.read_lux() < light_0 / 2:
+        r.turning(12)
+        r.walk(5)
+    else:
+        r.hulk()
+
+    run_auto(r, s, light_0, obstacles+1)
+
     return
 
 
@@ -100,7 +119,9 @@ if __name__ == "__main__":
     r = robot.Robot()
     s = sensors.Sensors()
 
+    light_0 = s.read_lux()
+
     if auto:
-        run_auto(r)
+        run_auto(r, s, light_0)
     else:
         run_manual(r, s)

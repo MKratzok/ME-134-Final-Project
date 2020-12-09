@@ -47,15 +47,31 @@ class Sensors:
 
     @property
     def range(self):
-        val = self.vl53l0x.range
-        print('Range: {0}mm'.format(val))
-        return val
+        def helper():
+            return self.vl53l0x.range
+
+        x = 0
+        for x in range(0, 5):
+            x += helper()
+
+        x = x/5
+
+        print('Range: {0}mm'.format(x))
+        return x
 
     @property
     def range_short(self):
-        val = self.vl6180X.range
-        print('Range: {0}mm'.format(val))
-        return val
+        def helper():
+            return self.vl6180X.range
+
+        x = 0
+        for i in range(0, 5):
+            x += helper()
+
+        x = x / 5
+
+        print('Range: {0}mm'.format(x))
+        return x
 
     @property
     def range_status(self):
@@ -64,16 +80,23 @@ class Sensors:
         return val
 
     def read_lux(self, gain=1):
-        gain_val = ''
-        for v in GAIN:
-            if v[0] == gain:
-                gain_val = v[1]
+        def helper():
+            gain_val = ''
+            for v in GAIN:
+                if v[0] == gain:
+                    gain_val = v[1]
 
-        if gain_val == '':
-            print('ERROR: {}x gain is not available'.format(gain))
-            return -1
+            if gain_val == '':
+                print('ERROR: {}x gain is not available'.format(gain))
+                return -1
 
-        lux = self.vl6180X.read_lux(gain_val)
+            return self.vl6180X.read_lux(gain_val)
+
+        x = 0
+        for i in range(0, 5):
+            x += helper()
+
+        lux = x / 5
 
         print('Light ({}x gain): '.format(gain) + '{0} lux'.format(lux))
         return lux
