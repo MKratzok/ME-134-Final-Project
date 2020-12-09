@@ -4,7 +4,7 @@ from time import sleep
 import sensors
 
 
-def run_auto(r, s, light_0, obstacles=0):
+def run_auto(r, s, light_0, obstacles=0, wall=False, tunnel=False, hulk=False, do_hulk=False, do_wall=False):
     input('Am I in the right spot to start? Press enter to continue...')
 
     # Automatic mode
@@ -13,17 +13,58 @@ def run_auto(r, s, light_0, obstacles=0):
         print('Heck yeah! I did it!!! Aren\'t you proud of me??? :)')
         return
 
-    # Check if wall
-    if s.range < 100 and s.read_lux() >= light_0 - 5:
+    if not wall and ((s.range <= 100 and s.read_lux() >= 20) or do_wall or tunnel and hulk):
+        print('wall')
+        r.hips(135)
+        sleep(1)
         r.walk(5)
         r.climb()
-    elif s.read_lux() < light_0 / 2:
+        run_auto(r, s, light_0, obstacles=obstacles+1, wall=True, tunnel=tunnel, hulk=hulk)
+    elif not tunnel and (s.read_lux() < 20 or wall and hulk):
+        print('tunnel')
+        r.hips(135)
         r.turning(12)
         r.walk(5)
-    else:
+        run_auto(r, s, light_0, obstacles=obstacles+1, wall=wall, tunnel=True, hulk=hulk)
+    elif not hulk and (wall and tunnel or do_hulk):
+        print('hulk')
+        r.hips(135)
         r.hulk()
+        run_auto(r, s, light_0, obstacles=obstacles+1, wall=wall, tunnel=tunnel, hulk=True)
+    else:
+        print('Continuing on...')
+        init_high = s.range
 
-    run_auto(r, s, light_0, obstacles+1)
+        r.hips(135)
+        init = s.range
+
+        sleep(1)
+
+        r.walk(5)
+
+        sleep(1)
+
+        new = s.range
+
+        r.hips(25)
+        sleep(1)
+
+        new_high = s.range
+
+        sleep(1)
+
+        r.hips(135)
+
+        if init - new > 50:
+            if init_high - new_high > 50:
+                if s.read_lux() >= 20 and s.range < 125:
+                    run_auto(r, s, light_0, obstacles=obstacles, wall=wall, tunnel=tunnel, hulk=hulk, do_wall=True)
+                else:
+                    run_auto(r, s, light_0, obstacles=obstacles, wall=wall, tunnel=tunnel, hulk=hulk)
+            else:
+                run_auto(r, s, light_0, obstacles=obstacles, wall=wall, tunnel=tunnel, hulk=hulk, do_hulk=True)
+
+    run_auto(r, s, light_0, obstacles=obstacles, wall=wall, tunnel=tunnel, hulk=hulk)
 
     return
 
