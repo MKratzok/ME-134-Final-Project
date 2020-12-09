@@ -84,9 +84,9 @@ class Robot:
     def walk(self, steps):
         for i in range(0, steps):
             delay = 0.3
-            self.lHip.angle = 100
+            self.lHip.angle = 110
             sleep(delay)
-            self.lKnee.angle = 110
+            self.lKnee.angle = 130
             sleep(delay)
             self.lHip.angle = 45
             sleep(delay)
@@ -94,7 +94,7 @@ class Robot:
             sleep(delay)
             self.lKnee.angle = 90
             sleep(delay)
-            self.rKnee.angle = 70
+            self.rKnee.angle = 80
             sleep(delay)
             self.rHip.angle = 135
             sleep(delay)
