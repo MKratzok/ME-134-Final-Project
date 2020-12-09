@@ -68,6 +68,8 @@ def run_manual(r, s):
             print(('Light {} lux'.format(s.read_lux()).ljust(21, '-')).rjust(30,'-'))
         elif c == 'p':
             s.send_photo()
+        elif c == 'ph':
+            s.send_photo(sendto='Matthew.Woodward@tufts.edu')
         elif c == 'q':
             return
         elif c == 'a':
@@ -77,7 +79,7 @@ def run_manual(r, s):
             print(('Range {}mm'.format(s.range_short).ljust(20, '-')).rjust(30, '-'))
         else:
             print('This should not happen. Please contact MAX and tell him that \"' + c + '\" messed up the cmd seq.')
-            exit(-69)
+            exit(-1)
 
 
 if __name__ == "__main__":

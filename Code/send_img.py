@@ -71,7 +71,6 @@ SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 GMAIL_USERNAME = 'MaxKsRaspberryPi@gmail.com'
 GMAIL_PASSWORD = 'kak6rravQ'
-SENDTO = 'kratzok@gmail.com'
 PHOTO_PATH = "/home/pi/SecurityPhoto.jpg"
 
 
@@ -169,7 +168,7 @@ class Emailer:
         session.quit
 
 
-def run(cam):
+def run(cam, sendto='kratzok@gmail.com'):
     snap_photo(cam)
 
     sender = Emailer()
@@ -177,7 +176,7 @@ def run(cam):
     email_subject = "LERMON Photo"
     email_content = "Here is the LERMON Photo."
 
-    sender.sendmail(SENDTO, email_subject, email_content, PHOTO_PATH)
+    sender.sendmail(sendto, email_subject, email_content, PHOTO_PATH)
 
 
 if __name__ == '__main__':
