@@ -2,8 +2,9 @@ import board
 import busio
 import adafruit_vl6180x
 import adafruit_vl53l0x
-import cv2
+from picamera import PiCamera
 import time
+import send_img
 
 GAIN = [[1, adafruit_vl6180x.ALS_GAIN_1],  # 1x gain
         [1.25, adafruit_vl6180x.ALS_GAIN_1_25],  # 1.25x gain
@@ -17,15 +18,24 @@ GAIN = [[1, adafruit_vl6180x.ALS_GAIN_1],  # 1x gain
 
 class Sensors:
     def __init__(self):
+        self.camera = PiCamera()
+        self.camera.rotation = 180
+
         i2c = busio.I2C(board.SCL, board.SDA)
 
-        input('Is VL6180 unplugged?')
-        self.change_addr(i2c)
-        self.vl53l0x = self.change_addr(i2c)
-        input('Good to go, press enter to continue. ')
+        try:
+            self.vl53l0x = adafruit_vl53l0x.VL53L0X(i2c, address=28)
+        except:
+            input('Unplug VL6180 (top Time of Flight sensor)')
+            self.change_addr(i2c)
+            self.vl53l0x = self.change_addr(i2c)
+            input('Plug it back in and press enter to continue. ')
 
-        self.vl6180X = adafruit_vl6180x.VL6180X(i2c)
-        self.cap = cv2.VideoCapture(0)
+        try:
+            self.vl6180X = adafruit_vl6180x.VL6180X(i2c)
+        except:
+            input('Plug in the VL6180x Sensor. Press enter to continue.')
+            self.vl6180X = adafruit_vl6180x.VL6180X(i2c)
         time.sleep(0.25)
 
     def change_addr(self, i2c):
@@ -68,6 +78,6 @@ class Sensors:
         print('Light ({}x gain): '.format(gain) + '{0} lux'.format(lux))
         return lux
 
-    def take_photo(self):
-        ret, img = self.cap.read()
+    def send_photo(self):
+        send_img.run(self.camera)
         print('I took a picture! :)')

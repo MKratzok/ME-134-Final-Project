@@ -49,12 +49,12 @@ def run_manual(r, s):
         c = menu()
 
         if c == 'w':
-            steps = input('\t\tHow many steps?')
+            steps = int(input('\t\tHow many steps?'))
             r.walk(steps)
         elif c == 't':
             r.turning(12)
         elif c == 'm':
-            steps = input('\t\tHow many steps?')
+            steps = int(input('\t\tHow many steps?'))
             r.turning(steps)
         elif c == 'c':
             print('not implemented... sorry.... YET!')
@@ -67,11 +67,11 @@ def run_manual(r, s):
         elif c == 'l':
             print(('Light {} lux'.format(s.read_lux()).ljust(21, '-')).rjust(30,'-'))
         elif c == 'p':
-            s.take_photo()
+            s.send_photo()
         elif c == 'q':
             return
         elif c == 'a':
-            gain = input('What gain level would you like? 1, 1.25, 1.67, 2.5, 5, 10, 20, 40?')
+            gain = int(input('What gain level would you like? 1, 1.25, 1.67, 2.5, 5, 10, 20, 40?'))
             print(('Light {} lux'.format(s.read_lux(gain)).ljust(21, '-')).rjust(30, '-'))
         elif c == 'sh':
             print(('Range {}mm'.format(s.range_short).ljust(20, '-')).rjust(30, '-'))
