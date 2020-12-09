@@ -27,7 +27,7 @@ class Sensors:
             self.vl53l0x = adafruit_vl53l0x.VL53L0X(i2c, address=28)
         except:
             input('Unplug VL6180 (top Time of Flight sensor)')
-            self.change_addr(i2c)
+            # self.change_addr(i2c)
             self.vl53l0x = self.change_addr(i2c)
             input('Plug it back in and press enter to continue. ')
 
@@ -50,12 +50,14 @@ class Sensors:
         def helper():
             return self.vl53l0x.range
 
-        x = 0
-        for x in range(0, 5):
-            x += helper()
-
-        x = x/5
-
+        # x = 0
+        # count = 0
+        # for x in range(0, 5):
+        #     count +=1
+        #     x += helper()
+        #
+        # x = x/count
+        x = helper()
         print('Range: {0}mm'.format(x))
         return x
 
@@ -65,10 +67,12 @@ class Sensors:
             return self.vl6180X.range
 
         x = 0
+        count = 0
         for i in range(0, 5):
+            count +=1
             x += helper()
 
-        x = x / 5
+        x = x / count
 
         print('Range: {0}mm'.format(x))
         return x
@@ -93,10 +97,12 @@ class Sensors:
             return self.vl6180X.read_lux(gain_val)
 
         x = 0
+        count = 0
         for i in range(0, 5):
+            count +=1
             x += helper()
 
-        lux = x / 5
+        lux = x / count
 
         print('Light ({}x gain): '.format(gain) + '{0} lux'.format(lux))
         return lux

@@ -13,20 +13,20 @@ def run_auto(r, s, light_0, obstacles=0, wall=False, tunnel=False, hulk=False, d
         print('Heck yeah! I did it!!! Aren\'t you proud of me??? :)')
         return
 
-    if not wall and ((s.range <= 100 and s.read_lux() >= 20) or do_wall or tunnel and hulk):
+    if not wall and ((s.range <= 100 and s.read_lux() >= 20) or do_wall or (tunnel and hulk)):
         print('wall')
         r.hips(135)
         sleep(1)
         r.walk(5)
         r.climb()
         run_auto(r, s, light_0, obstacles=obstacles+1, wall=True, tunnel=tunnel, hulk=hulk)
-    elif not tunnel and (s.read_lux() < 20 or wall and hulk):
+    elif not tunnel and (s.read_lux() < 20 or (wall and hulk)):
         print('tunnel')
         r.hips(135)
         r.turning(12)
         r.walk(5)
         run_auto(r, s, light_0, obstacles=obstacles+1, wall=wall, tunnel=True, hulk=hulk)
-    elif not hulk and (wall and tunnel or do_hulk):
+    elif not hulk and (wall and (tunnel or do_hulk)):
         print('hulk')
         r.hips(135)
         r.hulk()
@@ -82,10 +82,11 @@ def menu():
           '\t[L]ight level\n'
           '\t[A]djust gain for light level\n'
           '\t[P]icture\n'
+          '\t[Pi]cture to Prof\n'
           '\t[Q]uit\n')
     c = input().lower()
 
-    if c in ['w', 't', 'c', 'r', 'e', 's', 'l', 'p', 'q', 'm', 'a', 'sh']:
+    if c in ['w', 't', 'c', 'r', 'e', 's', 'l', 'p', 'q', 'm', 'a', 'sh', 'p', 'pi']:
         return c
     else:
         print('Command not found.')
@@ -128,7 +129,7 @@ def run_manual(r, s):
             print(('Light {} lux'.format(s.read_lux()).ljust(21, '-')).rjust(30,'-'))
         elif c == 'p':
             s.send_photo()
-        elif c == 'ph':
+        elif c == 'pi':
             s.send_photo(sendto='Matthew.Woodward@tufts.edu')
         elif c == 'q':
             return

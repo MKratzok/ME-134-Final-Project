@@ -248,3 +248,23 @@ class Robot:
                 degrees += 60
 
         self.kit.servo[8].angle = 60 + degrees
+
+    def climb(self):
+        self.knees(-90)
+        self.hips(180)
+        self.ankles(180)
+        self.feet(180)
+        self.knees(45)
+
+    def hulk(self, n=4):
+        if n == -1:
+            return
+        else:
+            self.climb()
+
+            sleep(1)
+
+            self.walk(5)
+            self.hulk(n-1)
+
+            return
