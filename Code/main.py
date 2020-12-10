@@ -120,7 +120,7 @@ def run_manual(r, s):
             steps = int(input('\t\tHow many steps?'))
             r.turning(steps)
         elif c == 'c':
-            print('not implemented... sorry.... YET!')
+            r.climb()
         elif c == 'r':
             r.reset()
         elif c == 'e':

@@ -2,7 +2,7 @@ import board
 import busio
 import adafruit_vl6180x
 import adafruit_vl53l0x
-from picamera import PiCamera
+# from picamera import PiCamera
 import time
 import send_img
 
@@ -18,9 +18,9 @@ GAIN = [[1, adafruit_vl6180x.ALS_GAIN_1],  # 1x gain
 
 class Sensors:
     def __init__(self):
-        self.camera = PiCamera()
-        self.camera.rotation = 180
-
+        # self.camera = PiCamera()
+        # self.camera.rotation = 180
+        #
         i2c = busio.I2C(board.SCL, board.SDA)
 
         try:
@@ -107,6 +107,6 @@ class Sensors:
         print('Light ({}x gain): '.format(gain) + '{0} lux'.format(lux))
         return lux
 
-    def send_photo(self, sendto='kratzok@gmail.com'):
-        send_img.run(self.camera, sendto)
-        print('I took a picture! :)')
+    # def send_photo(self, sendto='kratzok@gmail.com'):
+    #     send_img.run(self.camera, sendto)
+    #     print('I took a picture! :)')
