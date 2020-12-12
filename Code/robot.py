@@ -293,6 +293,7 @@ class Robot:
 
     def climb(self):
         self.knees(-90)
+        sleep
         self.hips(180)
         self.ankles(180)
         self.feet(180)

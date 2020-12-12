@@ -70,7 +70,7 @@ KEY = '&5UX0!tuY3C8HIWo$sT@dE#LxOfy%lRj1eKb)P(^gkcMr7SA2DwZavQB4*nmNhz6FJGpVq9i'
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 GMAIL_USERNAME = 'MaxKsRaspberryPi@gmail.com'
-GMAIL_PASSWORD = 'kak6rravQ'
+GMAIL_PASSWORD = '***********'
 PHOTO_PATH = "/home/pi/SecurityPhoto.jpg"
 
 
